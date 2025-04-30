@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../../common/layout/Header";
-import ProductDetails from "./card/ProductDetails";
+import ProductDetails from "./layOut/ProductDetails";
 import { useParams } from "react-router-dom";
 
 function ProductLayout() {
