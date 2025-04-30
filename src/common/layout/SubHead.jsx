@@ -25,16 +25,12 @@ function SubHead() {
     { name: "description", type: "text" },
     { name: "image", type: "file" },
   ];
-
-  // Set form fields based on selected type
   const field =
     fields === "category"
       ? category
       : fields === "subCategory"
       ? subCategory
       : product;
-
-  // Dynamically change modal width
   const className = fields === "product" ? "w-[600px]" : "w-[400px]";
 
   return (

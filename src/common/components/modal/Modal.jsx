@@ -4,7 +4,7 @@ import Button from "../button/Button";
 import useForm from "../../../hooks/formHook";
 
 function Modal({ showModal, setShowModal, field, className, fields }) {
-  const [previewImages, setPreviewImages] = useState([])
+  const [previewImages, setPreviewImages] = useState([]);
 
   const initialvalues =
     fields === "category"
@@ -14,14 +14,18 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
           title: "",
           description: "",
           subCatogery: "",
-          images: [], // Start with empty array for multiple images
+          images: [],
           varients: [{ varientName: "", price: "", stock: "" }],
         }
       : { selectCategory: "", subCategoryName: "" };
 
-  const formik = useForm(initialvalues, (values) => {
-    console.log("Form Submitted:", values);
-  }, fields);
+  const formik = useForm(
+    initialvalues,
+    (values) => {
+      console.log("Form Submitted:", values);
+    },
+    fields
+  );
   const addVariant = () => {
     formik.setFieldValue("varients", [
       ...formik.values.varients,
@@ -45,14 +49,14 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
     if (e.target.type === "file") {
       const files = Array.from(e.target.files);
       if (files.length > 0) {
-        const newPreviews = files.map(file => URL.createObjectURL(file));
+        const newPreviews = files.map((file) => URL.createObjectURL(file));
         setPreviewImages([...previewImages, ...newPreviews]);
         const currentImages = formik.values.images || [];
         formik.setFieldValue("images", [...currentImages, ...files]);
         console.log(`${files.length} files selected`);
       }
     } else {
-      formik.handleChange(e)
+      formik.handleChange(e);
     }
   };
 
@@ -117,8 +121,8 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
                           multiple
                         />
                         <p className="text-sm text-gray-600">
-                          {previewImages.length > 0 
-                            ? `${previewImages.length} image(s) selected` 
+                          {previewImages.length > 0
+                            ? `${previewImages.length} image(s) selected`
                             : "No images selected"}
                         </p>
                         {previewImages.length > 0 && (
@@ -127,10 +131,10 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
                               <div key={idx} className="relative">
                                 <img
                                   src={preview}
-                                  alt={`Preview ${idx+1}`}
+                                  alt={`Preview ${idx + 1}`}
                                   className="w-24 h-24 object-cover rounded"
                                 />
-                                <button 
+                                <button
                                   type="button"
                                   className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
                                   onClick={() => removeImage(idx)}
