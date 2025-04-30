@@ -32,6 +32,16 @@ export const getProductById = createAsyncThunk("productById", async (id) => {
   }
 });
 
+export const addProduct = createAsyncThunk("addProduct", async (formData) => {
+  try {
+    const res = await axios.post(`http://localhost:406/api/add/product`,formData);
+    return res.data.message;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+});
+
 const initialState = {
   data: [],
   dataById: [],
@@ -58,10 +68,10 @@ const productSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getProductById.fulfilled, (state, action) => {
-        state.loading = false;
-        state.product = action.payload.product;
-        state.varients = action.payload.varients;
-      });
+      state.loading = false;
+      state.product = action.payload.product;
+      state.varients = action.payload.varients;
+    });
     builder.addCase(getProductById.rejected, (state, action) => {
       (state.loading = true), (state.errror = "error occurss");
     });

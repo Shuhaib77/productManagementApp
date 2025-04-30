@@ -15,6 +15,21 @@ export const getsubCatogery = createAsyncThunk(
   }
 );
 
+export const addSubCatogery = createAsyncThunk(
+  "addSubCatData",
+  async (values) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:406/api/add/subcatogery`,
+        values
+      );
+      return res.data.message;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const initialState = {
   subCatdata: [],
   loading: false,
