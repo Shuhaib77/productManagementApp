@@ -2,6 +2,8 @@ import React from "react";
 import Input from "../../../common/components/input/Input";
 import Button from "../../../common/components/button/Button";
 import useForm from "../../../hooks/formHook";
+import { registerSchema } from "../../../utils/registerSchema";
+import { loginschema } from "../../../utils/loginSchema";
 
 function Auth({ name, heading }) {
   const register = [
@@ -35,6 +37,7 @@ function Auth({ name, heading }) {
     },
   ];
 
+  const validatinSchema = name === "Register" ? registerSchema : loginschema;
   const field = name === "Register" ? register : login;
   const initialValues =
     name === "Register"
@@ -46,7 +49,9 @@ function Auth({ name, heading }) {
     (values) => {
       console.log(values);
     },
-    name
+    name,
+    "",
+    validatinSchema
   );
 
   return (
@@ -57,7 +62,8 @@ function Auth({ name, heading }) {
       >
         <h1 className="text-yellow-500 text-5xl font-bold">{heading}</h1>
         {field.map((item, i) => (
-          <Input
+        <div>
+              <Input
             key={i}
             placeholder={item.name}
             type={item.type}
@@ -68,7 +74,13 @@ function Auth({ name, heading }) {
             value={formik.values[item.name]}
             error={formik.errors[item.name]}
           />
+          <span className="text-red-400 text-sm text-left">
+          {formik.touched[item.name] && formik.errors[item.name]}
+        </span>
+        </div>
+
         ))}
+     
         <div className="text-center">
           <Button
             name={"submit"}

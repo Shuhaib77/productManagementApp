@@ -7,11 +7,12 @@ import { addCatogery } from "../../redux/catogerySlice";
 import { addSubCatogery } from "../../redux/subCatogeryslice";
 import { login, register } from "../service/auth";
 
-function useForm(initialValue, onsubmit, name, setShowModal) {
+function useForm(initialValue, onsubmit, name, setShowModal,validationSchema) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const formik = useFormik({
+    validationSchema:validationSchema,
     initialValues: initialValue,
     onSubmit: async (values) => {
       console.log(values, "Form Values");
