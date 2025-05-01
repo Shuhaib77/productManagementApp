@@ -79,12 +79,12 @@ function ProductDescription({ id }) {
               key={i}
               onClick={() => handleVariantClick(item)}
               className={`text-sm border px-4 py-1 rounded cursor-pointer ${
-                selectedVariant?.varientName === item.varientName
+                selectedVariant?.varientName === item?.varientName
                   ? "bg-white text-black font-semibold"
                   : "bg-transparent hover:bg-white hover:text-black"
               }`}
             >
-              {item.varientName}
+              {item?.varientName}
             </div>
           ))}
         </div>

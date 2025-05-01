@@ -65,17 +65,17 @@ function Auth({ name, heading }) {
         <div>
               <Input
             key={i}
-            placeholder={item.name}
-            type={item.type}
-            icon={item.icon}
+            placeholder={item?.name}
+            type={item?.type}
+            icon={item?.icon}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            name={item.name}
-            value={formik.values[item.name]}
-            error={formik.errors[item.name]}
+            name={item?.name}
+            value={formik.values[item?.name]}
+            error={formik.errors[item?.name]}
           />
           <span className="text-red-400 text-sm text-left">
-          {formik.touched[item.name] && formik.errors[item.name]}
+          {formik.touched[item?.name] && formik.errors[item?.name]}
         </span>
         </div>
 

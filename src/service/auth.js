@@ -4,7 +4,7 @@ import { getProductData } from "../../redux/productSlice";
 
 export const register = async (values,navigate) => {
   await api.post("register", values);
-  alert("hiii");
+  navigate("/")
 };
 export const login = async (values, navigate) => {
     try {
@@ -17,8 +17,8 @@ export const login = async (values, navigate) => {
     }
   };
 
-  export const getData = async (values,navigate) => {
-    useEffect(()=>{
-        getProductData(values)
-    },[])
-  };
+//   export const getData = async (values,navigate) => {
+//     useEffect(()=>{
+//         getProductData(values)
+//     },[])
+//   };

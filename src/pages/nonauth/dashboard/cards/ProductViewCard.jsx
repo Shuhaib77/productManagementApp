@@ -20,36 +20,36 @@ function ProductViewCard() {
     <div className="flex flex-wrap p-4 gap-x-5">
       {data?.map((item) => (
         <div
-          key={item._id}
+          key={item?._id}
           className="w-[300px] h-auto border border-gray-200 shadow-md rounded cursor-pointer"
         >
           <h1
             className="text-right p-3"
             onClick={() => {
-              dispatch(addWishlists(item._id));
+              dispatch(addWishlists(item?._id));
             }}
           >
             <i class="fa-solid fa-heart"></i>
           </h1>
           <div
             className="h-[150px] flex justify-center items-center p-5"
-            onClick={() => navigate(`/productdetail/${item._id}`)}
+            onClick={() => navigate(`/productdetail/${item?._id}`)}
           >
             <img
               className="h-full object-cover"
               src={item?.image[0]}
-              alt={item.title}
+              alt={item?.title}
             />
           </div>
           <div className="p-5 space-y-2">
-            <h1 className="font-semibold text-lg">{item.title}</h1>
+            <h1 className="font-semibold text-lg">{item?.title}</h1>
 
-            {item.varient && item.varient.length > 0 ? (
+            {item?.varient && item?.varient?.length > 0 ? (
               <div className="space-y-1">
-                {item.varient.map((item) => (
-                  <div key={item._id} className="text-sm text-gray-700">
+                {item?.varient?.map((item) => (
+                  <div key={item?._id} className="text-sm text-gray-700">
                     <p>
-                      {item.varientName} - {item.price}
+                      {item?.varientName} - {item?.price}
                     </p>
                   </div>
                 ))}

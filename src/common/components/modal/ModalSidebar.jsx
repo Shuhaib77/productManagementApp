@@ -48,29 +48,29 @@ function ModalSidebar({ setIsOpen, isOpen, wishlistData }) {
           <Button
             onClick={() => setIsOpen(false)}
             className="text-white text-xl hover:text-yellow-400"
-            name={"    ×"}
+            name={"×"}
           />
         </div>
         <div className="p-4 h-full flex flex-col gap-y-4 overflow-y-auto">
           {wishlistData?.length > 0 ? (
-            wishlistData.map((item) => (
+            wishlistData?.map((item) => (
               <div
-                key={item._id}
+                key={item?._id}
                 className="border rounded-lg flex items-center gap-2 p-2"
               >
                 <div className="w-20 h-20 flex-shrink-0">
                   <img
-                    src={item.image[0]}
-                    alt={item.title}
+                    src={item?.image[0]}
+                    alt={item?.title}
                     className="w-full h-full object-cover rounded"
                   />
                 </div>
 
                 <div className="flex-grow">
-                  <h1 className="text-sm font-medium">{item.title}</h1>
+                  <h1 className="text-sm font-medium">{item?.title}</h1>
                 </div>
                 <Button
-                  onClick={() => handleDelete(item._id)}
+                  onClick={() => handleDelete(item?._id)}
                   className="text-red-500 hover:text-red-700 text-xl"
                   title="Remove from wishlist"
                   name={<i className="fa-regular fa-circle-xmark"></i>}

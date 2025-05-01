@@ -17,8 +17,8 @@ function AuthSidebar({ name, heading, paragraph }) {
           <Button
             onClick={() => {
               name === "Register"
-                ? navigate("/auth/login")
-                : navigate("/auth/register");
+                ? navigate("/")
+                : navigate("/register");
             }}
             name={name === "Register" ? "Login" : "Register"}
             className={"border border-white w-[250px] text-white rounded-2xl"}

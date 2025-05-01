@@ -99,7 +99,7 @@ function Modal({
             <form onSubmit={formik.handleSubmit}>
               <div className="grid grid-cols-1 gap-4 w-full">
                 {field.map((item, i) => {
-                  if (item.name === "varients") {
+                  if (item?.name === "varients") {
                     return (
                       <div key={i} className="w-full">
                         <p className="font-semibold mb-1">Variants</p>
@@ -111,19 +111,19 @@ function Modal({
                             {item.data.map((variantItem, j) => (
                               <Input
                                 key={j}
-                                placeholder={variantItem.name}
-                                type={variantItem.type}
+                                placeholder={variantItem?.name}
+                                type={variantItem?.type}
                                 name={`varients[${index}].${variantItem.name}`}
-                                value={variant[variantItem.name]}
+                                value={variant[variantItem?.name]}
                                 handleChange={formik.handleChange}
                               />
                             ))}
 
-                            {variant._id && (
+                            {variant?._id && (
                               <input
                                 type="hidden"
                                 name={`varients[${index}]._id`}
-                                value={variant._id}
+                                value={variant?._id}
                               />
                             )}
                             <Button
@@ -158,7 +158,7 @@ function Modal({
                             : "No images selected"}
                         </p>
 
-                        {/* Show existing images if present */}
+                     {/* showexistingimg */}
                         {product?.image?.length > 0 && (
                           <div className="mt-4">
                             <p className="font-semibold mb-2">
@@ -211,13 +211,13 @@ function Modal({
                     return (
                       <Input
                         key={i}
-                        placeholder={item.name}
-                        type={item.type}
-                        name={item.name}
-                        value={formik.values[item.name]}
+                        placeholder={item?.name}
+                        type={item?.type}
+                        name={item?.name}
+                        value={formik.values[item?.name]}
                         handleChange={formik.handleChange}
                         handleBlur={formik.handleBlur}
-                        errors={formik.errors[item.name]}
+                        errors={formik.errors[item?.name]}
                       />
                     );
                   }
