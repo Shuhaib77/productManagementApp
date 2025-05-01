@@ -35,7 +35,7 @@ function SubHead() {
 
   return (
     <div>
-      <div className="flex justify-between shadow-sm h-[6vh] items-center px-4">
+      <div className="lg:flex-row lg:justify-between sm:flex flx-col shadow-sm items-center p-3 h-full">
         <h1 className="text-lg font-semibold">Home</h1>
         <div className="flex gap-x-5">
           <Button
