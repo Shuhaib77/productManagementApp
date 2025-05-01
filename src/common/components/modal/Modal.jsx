@@ -118,7 +118,7 @@ function Modal({
                                 handleChange={formik.handleChange}
                               />
                             ))}
-                            {/* Hidden input to keep variant _id */}
+
                             {variant._id && (
                               <input
                                 type="hidden"
@@ -185,7 +185,6 @@ function Modal({
                           </div>
                         )}
 
-                        {/* Show newly selected images */}
                         {previewImages.length > 0 && (
                           <div className="flex flex-wrap gap-2 mt-2">
                             {previewImages.map((preview, idx) => (
@@ -237,12 +236,8 @@ function Modal({
                   name="Cancel"
                 />
               </div>
-             
             </form>
-            {
-                console.log(formik.values)
-                
-              }
+            {console.log(formik.values)}
           </div>
         </div>
       )}

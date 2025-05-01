@@ -39,7 +39,6 @@ function useForm(
         if (values.images && values.images.length > 0) {
           values.images.forEach((image) => {
             if (typeof image === "string") {
-              // Skip already uploaded image URLs
               return;
             }
             formData.append("images", image);
@@ -64,12 +63,12 @@ function useForm(
         dispatch(getProductData(values));
         setShowModal(false);
       } else if (name === "Add category") {
-       await dispatch(addCatogery(values));
-        dispatch(getCatogery())
+        await dispatch(addCatogery(values));
+        dispatch(getCatogery());
         setShowModal(false);
       } else if (name === "Add subCategory") {
         await dispatch(addSubCatogery(values));
-        dispatch(getsubCatogery())
+        dispatch(getsubCatogery());
       } else {
         await login(values, navigate);
       }

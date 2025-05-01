@@ -24,9 +24,6 @@ function ProductDescription({ id }) {
     setSelectedVariant(variant);
   };
 
-  
-  
-
   const field = [
     { name: "title", type: "text" },
     {
@@ -104,7 +101,16 @@ function ProductDescription({ id }) {
           <i className="fa-regular fa-heart fa-2xl text-red-500 cursor-pointer"></i>
         </div>
       </div>
-      {showModal && <Modal field={field} fields={"update Product"} setShowModal={setShowModal} showModal={showModal} product={product} varients={varients} />}
+      {showModal && (
+        <Modal
+          field={field}
+          fields={"update Product"}
+          setShowModal={setShowModal}
+          showModal={showModal}
+          product={product}
+          varients={varients}
+        />
+      )}
     </div>
   );
 }
