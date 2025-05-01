@@ -2,25 +2,45 @@ import React, { useEffect, useState } from "react";
 import { getProductById } from "../../../../../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../../common/components/button/Button";
+import Modal from "../../../../common/components/modal/Modal";
 
 function ProductDescription({ id }) {
   const { product, varients } = useSelector((state) => state.productData);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  //showvarientdata
+
   useEffect(() => {
     if (varients?.length > 0 && !selectedVariant) {
       setSelectedVariant(varients[0]);
     }
   }, [varients, selectedVariant]);
-  //getprdtbyId
+
   useEffect(() => {
     dispatch(getProductById(id));
   }, [id, dispatch]);
-  //getvarientwisedata
+
   const handleVariantClick = (variant) => {
     setSelectedVariant(variant);
   };
+
+  
+  
+
+  const field = [
+    { name: "title", type: "text" },
+    {
+      name: "varients",
+      data: [
+        { name: "varientName", type: "text" },
+        { name: "price", type: "number" },
+        { name: "stock", type: "number" },
+      ],
+    },
+    { name: "subCatogery", type: "text" },
+    { name: "description", type: "text" },
+    { name: "image", type: "file" },
+  ];
 
   return (
     <div className="md:w-1/2 p-6 md:p-10 flex flex-col gap-6">
@@ -77,12 +97,14 @@ function ProductDescription({ id }) {
             className={"bg-yellow-400 w-30 rounded-xl"}
           />
           <Button
+            onClick={() => setShowModal(true)}
             name={"edit product"}
             className={"bg-yellow-400 w-30 rounded-xl"}
           />
           <i className="fa-regular fa-heart fa-2xl text-red-500 cursor-pointer"></i>
         </div>
       </div>
+      {showModal && <Modal field={field} fields={"update Product"} setShowModal={setShowModal} showModal={showModal} product={product} varients={varients} />}
     </div>
   );
 }

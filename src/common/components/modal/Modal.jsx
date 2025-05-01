@@ -1,21 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import useForm from "../../../hooks/formHook";
 
-function Modal({ showModal, setShowModal, field, className, fields }) {
+function Modal({
+  showModal,
+  setShowModal,
+  field,
+  className,
+  fields,
+  product,
+  varients,
+}) {
   const [previewImages, setPreviewImages] = useState([]);
 
   const initialvalues =
-    fields === "category"
+    fields === "Add category"
       ? { name: "" }
-      : fields === "product"
+      : fields === "Add product" || "update Product"
       ? {
-          title: "",
-          description: "",
-          subCatogery: "",
-          images: [],
-          varients: [{ varientName: "", price: "", stock: "" }],
+          title: product?.title || "",
+          description: product?.description || "",
+          subCatogery: product?.subCatogery.name || "",
+          images: product?.images || [],
+          varients: varients?.length
+            ? varients.map((v) => ({
+                varientName: v.varientName || "",
+                price: v.price || "",
+                stock: v.stock || "",
+                _id: v._id || "",
+              }))
+            : [{ varientName: "", price: "", stock: "" }],
         }
       : { selectCategory: "", subCategoryName: "" };
 
@@ -25,23 +40,24 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
       console.log("Form Submitted:", values);
     },
     fields,
-    setShowModal
+    setShowModal,
+    "",
+    product?._id
   );
 
-  //addvarient
   const addVariant = () => {
     formik.setFieldValue("varients", [
       ...formik.values.varients,
       { varientName: "", price: "", stock: "" },
     ]);
   };
-  //removevarient
+
   const removeVariant = (index) => {
     const updated = [...formik.values.varients];
     updated.splice(index, 1);
     formik.setFieldValue("varients", updated);
   };
-  //removeimage
+
   const removeImage = (index) => {
     const updatedPreviews = [...previewImages];
     updatedPreviews.splice(index, 1);
@@ -59,18 +75,16 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
         setPreviewImages([...previewImages, ...newPreviews]);
         const currentImages = formik.values.images || [];
         formik.setFieldValue("images", [...currentImages, ...files]);
-        console.log(`${files.length} files selected`);
       }
     } else {
       formik.handleChange(e);
     }
   };
 
-  //   titlegets
   const getTitle = () => {
     if (fields === "category") return "Add Category";
     if (fields === "subCategory") return "Add Subcategory";
-    return "Add Product";
+    return "Edit Product";
   };
 
   return (
@@ -83,14 +97,17 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
             <h2 className="text-xl font-semibold mb-4">{getTitle()}</h2>
 
             <form onSubmit={formik.handleSubmit}>
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-4 w-full">
                 {field.map((item, i) => {
                   if (item.name === "varients") {
                     return (
-                      <div key={i}>
+                      <div key={i} className="w-full">
                         <p className="font-semibold mb-1">Variants</p>
-                        {formik.values.varients.map((variant, index) => (
-                          <div key={index} className="flex gap-2 mb-2">
+                        {formik.values?.varients?.map((variant, index) => (
+                          <div
+                            key={index}
+                            className="flex  items-center gap-2 w-full mb-2"
+                          >
                             {item.data.map((variantItem, j) => (
                               <Input
                                 key={j}
@@ -101,6 +118,14 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
                                 handleChange={formik.handleChange}
                               />
                             ))}
+                            {/* Hidden input to keep variant _id */}
+                            {variant._id && (
+                              <input
+                                type="hidden"
+                                name={`varients[${index}]._id`}
+                                value={variant._id}
+                              />
+                            )}
                             <Button
                               className="text-black px-2"
                               onClick={() => removeVariant(index)}
@@ -132,6 +157,35 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
                             ? `${previewImages.length} image(s) selected`
                             : "No images selected"}
                         </p>
+
+                        {/* Show existing images if present */}
+                        {product?.image?.length > 0 && (
+                          <div className="mt-4">
+                            <p className="font-semibold mb-2">
+                              Existing Images
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {product?.image?.map((image, idx) => (
+                                <div key={idx} className="relative">
+                                  <img
+                                    src={image}
+                                    alt={`Existing Image ${idx + 1}`}
+                                    className="w-24 h-24 object-cover rounded"
+                                  />
+                                  <button
+                                    type="button"
+                                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                                    onClick={() => removeImage(idx)}
+                                  >
+                                    ×
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Show newly selected images */}
                         {previewImages.length > 0 && (
                           <div className="flex flex-wrap gap-2 mt-2">
                             {previewImages.map((preview, idx) => (
@@ -175,15 +229,20 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
                 <Button
                   type="submit"
                   className="px-4 py-2 bg-gray-300 text-black hover:text-white rounded hover:bg-yellow-400"
-                  name="Add"
+                  name={product ? "updte Product" : fields}
                 />
                 <Button
                   onClick={() => setShowModal(false)}
                   className="px-4 py-2 bg-gray-300 text-black hover:text-white rounded hover:bg-yellow-400"
-                  name="Discard"
+                  name="Cancel"
                 />
               </div>
+             
             </form>
+            {
+                console.log(formik.values)
+                
+              }
           </div>
         </div>
       )}

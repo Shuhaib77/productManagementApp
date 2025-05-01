@@ -35,6 +35,19 @@ export const addProduct = createAsyncThunk("addProduct", async (formData) => {
   }
 });
 
+
+export const editProduct = createAsyncThunk("editProduct", async ({formData,productId}) => {
+    console.log(productId,"pp");
+    
+    try {
+      const res = await api.put(`update/product/${productId}`, formData,);
+      return res.data.message;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  });
+
 const initialState = {
   data: [],
   dataById: [],

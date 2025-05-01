@@ -26,12 +26,12 @@ function SubHead() {
     { name: "image", type: "file" },
   ];
   const field =
-    fields === "category"
+    fields === "Add category"
       ? category
-      : fields === "subCategory"
+      : fields === "Add subCategory"
       ? subCategory
       : product;
-  const className = fields === "product" ? "w-[600px]" : "w-[400px]";
+  const className = fields === "Add product" ? "w-[600px]" : "w-[400px]";
 
   return (
     <div>
@@ -43,7 +43,7 @@ function SubHead() {
             className={"bg-yellow-400 rounded-md"}
             onClick={() => {
               setShowModal(true);
-              setFields("category");
+              setFields("Add category");
             }}
           />
           <Button
@@ -51,7 +51,7 @@ function SubHead() {
             className={"bg-yellow-400 rounded-md"}
             onClick={() => {
               setShowModal(true);
-              setFields("subCategory");
+              setFields("Add subCategory");
             }}
           />
           <Button
@@ -59,7 +59,7 @@ function SubHead() {
             className={"bg-yellow-400 rounded-md"}
             onClick={() => {
               setShowModal(true);
-              setFields("product");
+              setFields("Add product");
             }}
           />
         </div>
