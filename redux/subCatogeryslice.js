@@ -1,13 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../src/service/api";
 
 export const getsubCatogery = createAsyncThunk(
   "subCatData",
   async (categoryId) => {
     try {
-      const res = await axios.get(
-        `http://localhost:406/api/subcatogery/${categoryId}`
-      );
+      const res = await api.get(`subcatogery/${categoryId}`);
       return res.data.subCatogery;
     } catch (error) {
       console.log(error);
@@ -19,10 +17,7 @@ export const addSubCatogery = createAsyncThunk(
   "addSubCatData",
   async (values) => {
     try {
-      const res = await axios.post(
-        `http://localhost:406/api/add/subcatogery`,
-        values
-      );
+      const res = await api.post(`add/subcatogery`, values);
       return res.data.message;
     } catch (error) {
       console.log(error);

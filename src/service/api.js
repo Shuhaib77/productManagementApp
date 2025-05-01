@@ -1,7 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../baseUrl";
 
-
 const api = axios.create({
   baseURL: BASE_URL,
 });
@@ -9,8 +8,8 @@ api.interceptors.request.use(
   (config) => {
     const token = sessionStorage.getItem("token");
     if (token) {
-      console.log(token, "token");
-
+        console.log(token,"otoken");
+        
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
@@ -45,4 +44,5 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+
+export default api

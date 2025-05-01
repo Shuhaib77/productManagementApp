@@ -24,19 +24,24 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
     (values) => {
       console.log("Form Submitted:", values);
     },
-    fields
+    fields,
+    setShowModal
   );
+
+  //addvarient
   const addVariant = () => {
     formik.setFieldValue("varients", [
       ...formik.values.varients,
       { varientName: "", price: "", stock: "" },
     ]);
   };
+  //removevarient
   const removeVariant = (index) => {
     const updated = [...formik.values.varients];
     updated.splice(index, 1);
     formik.setFieldValue("varients", updated);
   };
+  //removeimage
   const removeImage = (index) => {
     const updatedPreviews = [...previewImages];
     updatedPreviews.splice(index, 1);
@@ -45,6 +50,7 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
     updatedImages.splice(index, 1);
     formik.setFieldValue("images", updatedImages);
   };
+
   const handleChange = (e) => {
     if (e.target.type === "file") {
       const files = Array.from(e.target.files);
@@ -60,6 +66,7 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
     }
   };
 
+  //   titlegets
   const getTitle = () => {
     if (fields === "category") return "Add Category";
     if (fields === "subCategory") return "Add Subcategory";
@@ -69,7 +76,7 @@ function Modal({ showModal, setShowModal, field, className, fields }) {
   return (
     <div className="flex flex-col items-center justify-center">
       {showModal && (
-        <div className="fixed inset-0 backdrop-blur-md flex items-center justify-center z-50">
+        <div className="fixed inset-0 backdrop-blur-md flex bg-black/70 items-center justify-center z-50">
           <div
             className={`bg-white p-6 rounded-lg shadow-xl z-10 ${className}`}
           >

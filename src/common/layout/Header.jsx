@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProductData } from "../../../redux/productSlice";
+import ModalSidebar from "../components/modal/ModalSidebar";
+import { getWishlist } from "../../../redux/wishlistSlice";
 
 function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const { wishlistData } = useSelector((state) => state.wishlistData);
 
+  //search
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      dispatch(getProductData(searchTerm));
-    }, 500)
+      dispatch(getProductData({ search: searchTerm, subCatId: "" }));
+    }, 500);
 
-    return () => clearTimeout(delayDebounce)
+    return () => clearTimeout(delayDebounce);
   }, [searchTerm]);
+
+  //getwishlistData
+  useEffect(() => {
+    dispatch(getWishlist());
+  }, [isOpen]);
 
   return (
     <div className="flex h-[10vh] bg-[#143D60]">
@@ -29,15 +39,28 @@ function Header() {
           <Button
             name={"Search"}
             className={"bg-yellow-400 rounded-2xl w-22"}
-            // You can remove this button or disable it
             onClick={() => {}}
           />
         </div>
       </div>
       <div className="w-1/2 flex justify-center gap-x-4 items-center">
-        <h1>dede</h1>
-        <h1>def</h1>
+        <h1 onClick={() => setIsOpen(true)}>
+          <i class="fa-solid fa-heart fa-lg " style={{ color: "white" }}></i>
+        </h1>
+        <h1>
+          <i
+            class="fa-solid fa-cart-shopping fa-lg"
+            style={{ color: "white" }}
+          ></i>
+        </h1>
       </div>
+      {isOpen && (
+        <ModalSidebar
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          wishlistData={wishlistData}
+        />
+      )}
     </div>
   );
 }

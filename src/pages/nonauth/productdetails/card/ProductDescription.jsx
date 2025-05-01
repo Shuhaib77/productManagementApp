@@ -7,20 +7,17 @@ function ProductDescription({ id }) {
   const { product, varients } = useSelector((state) => state.productData);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const dispatch = useDispatch();
-
-  // set the first variant as default
+  //showvarientdata
   useEffect(() => {
     if (varients?.length > 0 && !selectedVariant) {
       setSelectedVariant(varients[0]);
     }
   }, [varients, selectedVariant]);
-
-  // dispatch product data based on id
+  //getprdtbyId
   useEffect(() => {
     dispatch(getProductById(id));
   }, [id, dispatch]);
-
-  // handle variant selection
+  //getvarientwisedata
   const handleVariantClick = (variant) => {
     setSelectedVariant(variant);
   };
@@ -76,11 +73,11 @@ function ProductDescription({ id }) {
         </div>
         <div className="flex gap-x-5 justify-between items-center mt-6">
           <Button
-            name={"Buy Now"}
+            name={"buy now"}
             className={"bg-yellow-400 w-30 rounded-xl"}
           />
           <Button
-            name={"Add to Cart"}
+            name={"edit product"}
             className={"bg-yellow-400 w-30 rounded-xl"}
           />
           <i className="fa-regular fa-heart fa-2xl text-red-500 cursor-pointer"></i>

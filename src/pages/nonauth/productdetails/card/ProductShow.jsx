@@ -6,11 +6,14 @@ function ProductShow({ id }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const { product, varients } = useSelector((state) => state.productData);
   const dispatch = useDispatch();
+
+  //selectImageView
   useEffect(() => {
     if (product?.image?.length) {
       setSelectedImage(product.image[0]);
     }
   }, [product]);
+  //getproductbyId
   useEffect(() => {
     dispatch(getProductById(id));
   }, [id, dispatch]);

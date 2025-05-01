@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "../../../../../redux/productSlice";
-import Button from "../../../../common/components/button/Button";
+import React from "react";
 import ProductShow from "../card/ProductShow";
 import ProductDescription from "../card/ProductDescription";
 

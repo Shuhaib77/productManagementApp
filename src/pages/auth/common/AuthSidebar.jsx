@@ -15,11 +15,11 @@ function AuthSidebar({ name, heading, paragraph }) {
           <h1 className="text-4xl font-bold text-white">{heading}</h1>
           <p className="text-white">{paragraph}</p>
           <Button
-             onClick={() => {
-                name === "Register"
-                  ? navigate("/auth/login")  
-                  : navigate("/auth/register");  
-              }}
+            onClick={() => {
+              name === "Register"
+                ? navigate("/auth/login")
+                : navigate("/auth/register");
+            }}
             name={name === "Register" ? "Login" : "Register"}
             className={"border border-white w-[250px] text-white rounded-2xl"}
           />

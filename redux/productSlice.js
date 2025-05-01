@@ -1,27 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import api from "../src/service/api";
 
 export const getProductData = createAsyncThunk(
   "productData",
-  async (search) => {
-    console.log(search);
-
-    try {
-      console.log(search, "hh");
-
-      const res = await axios.get(
-        `http://localhost:406/api/products?search=${search}`
-      );
-      return res.data.products;
-    } catch (error) {
-      console.log(error);
-    }
+  async ({ search = "", subCatIds = [] }) => {
+    const res = await api.get("products", {
+      params: { search, subCatIds: subCatIds.join(",") },
+    });
+    return res.data.products;
   }
 );
 
 export const getProductById = createAsyncThunk("productById", async (id) => {
   try {
-    const res = await axios.get(`http://localhost:406/api/products/${id}`);
+    const res = await api.get(`products/${id}`);
     return {
       product: res.data.product,
       varients: res.data.varients,
@@ -34,7 +27,7 @@ export const getProductById = createAsyncThunk("productById", async (id) => {
 
 export const addProduct = createAsyncThunk("addProduct", async (formData) => {
   try {
-    const res = await axios.post(`http://localhost:406/api/add/product`,formData);
+    const res = await api.post(`add/product`, formData);
     return res.data.message;
   } catch (error) {
     console.log(error);

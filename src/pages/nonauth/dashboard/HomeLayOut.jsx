@@ -11,14 +11,16 @@ function HomeLayOut() {
   const { catData } = useSelector((state) => state.catogeryData);
   const { subCatdata } = useSelector((state) => state.subCatogerydata);
   const dispatch = useDispatch();
+  //getCatogery
   useEffect(() => {
     dispatch(getCatogery());
   }, []);
+   //getSubCatogery
   const getSubcatData = (id) => {
     dispatch(getsubCatogery(id));
   };
   console.log(subCatdata, "oop");
-
+  console.log(catData, "000");
   return (
     <div>
       <Header />
