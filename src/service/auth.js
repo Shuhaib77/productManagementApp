@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+
 import api from "./api";
-import { getProductData } from "../../redux/productSlice";
+
 
 export const register = async (values,navigate) => {
   await api.post("register", values);
