@@ -40,7 +40,7 @@ function ModalSidebar({ setIsOpen, isOpen, wishlistData }) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-4 flex justify-between items-center border-b bg-blue-900 text-white">
+        <div className="p-5.5 flex justify-between items-center border-b bg-blue-900 text-white">
           <div className="flex justify-between items-center gap-x-3">
             <i class="fa-solid fa-heart fa-lg " style={{ color: "white" }}></i>
             <h2 className="text-lg font-semibold">Wishlist</h2>

@@ -25,7 +25,7 @@ function HomeLayOut() {
     <div>
       <Header />
       <SubHead />
-      <div className="lg:flex-row sm:flex flex-col sm:justify-center  ">
+      <div className="lg:flex-row  sm:flex flex-col   ">
         <Sidebar
           catData={catData}
           getSubcatData={getSubcatData}
