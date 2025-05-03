@@ -27,7 +27,7 @@ function Header() {
   }, [isOpen]);
 
   return (
-    <div className="flex h-[10vh] bg-[#143D60]">
+    <div className="flex h-[8vh] bg-[#143D60]">
       <div className="w-1/2 flex justify-end items-center">
         <div className="w-[400px] flex">
           <Input
